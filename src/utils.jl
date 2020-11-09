@@ -3,9 +3,16 @@ function xlog(x)
     x == 0 ? 0 : x * log(abs(x))
 end
 
-# generate a list of fractions [numerator, denominator] between [pMin,qMin] and [pMax,qMax]
-function coprimeFractionsGenerator(pMin,qMin,pMax,qMax)
+"""
+    coprimeFractionsGenerator(pMin::Int,qMin::Int,pMax::Int,qMax::Int)
+
+Return a vector all distinct simplified fractions between pMin/qMin and pMax/qMax in the form [numerator, denominator]. 
+"""
+function coprimeFractionsGenerator(pMin::Int,qMin::Int,pMax::Int,qMax::Int)
     result = []
+    if pMin > qMin || pMax > qMax
+        throw(ArgumentError("Parameter fractions must be lesser than 1!"))
+    end
     for q in qMin:qMax
         pmin = ( q==qMin ? pMin : 1   )
         pmax = ( q==qMax ? pMax : q-1 )
