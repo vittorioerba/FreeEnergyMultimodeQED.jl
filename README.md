@@ -16,11 +16,3 @@ To see what an exported function does, just use the bulit in Julia help
 ```
     ? function_name
 ```
-
-## TODO
-
-[ ] prepare a notebook illustrating the data processing 
-
-[ ] prepare a notebook that reproduces the figures of the paper
-
-[ ] upload data to the cloud
