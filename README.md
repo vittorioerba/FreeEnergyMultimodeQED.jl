@@ -21,7 +21,7 @@ Start a Julia REPL, and run
 
 The code is documented through docstrings in the code, at least for all exported functions.
 A list of exported functions can be found in [src/FreeEnergyMultimodeQED.jl](src/FreeEnergyMultimodeQED.jl).
-To see what an exported function does, just use the bulit in Julia help
+To see what an exported function does, just use the bulit-in Julia help
 ```
     ? function_name
 ```
