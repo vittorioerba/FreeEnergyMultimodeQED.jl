@@ -50,11 +50,11 @@ function preprocessRawDataframe(db::DataFrame)
     tot = nrow(db)
     db.totalTrials = ones(tot)*tot
     # add info on ground state configuration (rounded to 1 decimal, I'm interested in 0,+-1 basically) normalized to factor out the Z2 symmetry
-    db.cleanMinimum = map( u -> roundVec(u[:minimum],digits=1) |> normalizeZ2 , db |> eachrow)
+    db.cleanMinimum = map( u -> roundVector(u[:minimum],digits=1) |> flipZ2 , db |> eachrow)
     # and info on free energy of the exact minimum found, rounded to the second decimal
-    db.energy = map( u -> roundVec(freeEnergy(u[:minimum],u[:p],u[:q],u[:temperature]),digits=2) , db |> eachrow)
+    db.energy = map( u -> roundVector(modelFreeEnergy(u[:minimum],u[:p],u[:q],u[:temperature]),digits=2) , db |> eachrow)
     # and info on entropy of the clean minimum found, rounded to the second decimal
-    db.entropy = map( u -> roundVec(entropy(u[:minimum],u[:p],u[:q]),digits=2) , db |> eachrow)
+    db.entropy = map( u -> roundVector(modelEntropy(u[:minimum],u[:q]),digits=2) , db |> eachrow)
 
     return db
 end
@@ -64,7 +64,7 @@ end
 
 Takes a preprocessed DataFrame and extracts informations about the ground state (GS).
 It saves the GS energy and the list of distinct GSs into a Dictionary with fields ```energy, states```.
-It exports the results using the package ```JLD2``` into the file specified by ```file```.
+It exports the results using the package ```JLD``` into the file specified by ```file```; ```file``` must have extension ```.jld```.
     
 """
 function analyzeGS(db::DataFrame, file::String)
@@ -86,11 +86,13 @@ end
 
 Takes a preprocessed DataFrame and extracts informations about the local minima of the energy landscape.
 It saves  the list of distinct minima, the linear size of their basins of attraction and an estimate of the volume of the basins of attraction into a Dictionary with fields ```states, basinsLinear, basinsVolume```.
-It exports the results using the package ```JLD2``` into the file specified by ```file```.
+It exports the results using the package ```JLD``` into the file specified by ```file```; ```file``` must have extension ```.jld```.
+
 
 The estimate of the volume of a basin of attraction is given by the number of descents that ends in the corresponding minimum.
 
-The estimate of the linear size of a basin of attraction is given by the maximum distance between an initial condition of a descent and the corresponding minimum.
+The estimate of the linear size of a basin of attraction is given by the distance between all initial conditions and the minimum currently under study.
+This given, one can compute the maximum distance for example, or any other useful statistic.
 """
 function analyzeMinima(db::DataFrame, file::String)
     
@@ -123,7 +125,8 @@ end
     checkMinimaFound(db::DataFrame, file::String)
 
 Takes a preprocessed DataFrame and returns the curve of the number of distinct minima found VS the number of descent runs performed as a ```Matrix``` of size ```numberRuns x 2```, and saves it into a dictionary ith fields ```saturationCurve```.
-It exports the results using the package ```JLD2``` into the file specified by ```file```.
+It exports the results using the package ```JLD``` into the file specified by ```file```; ```file``` must have extension ```.jld```.
+
 Every time it is called, it recomputed this saturation curve using a different random permuation of the rows of ```db```.
 
 

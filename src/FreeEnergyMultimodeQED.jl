@@ -2,11 +2,11 @@ module FreeEnergyMultimodeQED
 
 ENV["CPLEX_STUDIO_BINARIES"] = "/opt/ibm/ILOG/CPLEX_Studio1210/cplex/bin/x86-64_linux"
 
-using Random                    # utils
-using LinearAlgebra             # model
-using CPLEX, Dates, Ipopt, JuMP # optimiziers
-using DelimitedFiles            # simulations, parsing
-using DataFrames, JLD2          # parsing
+using Random                     # utils
+using LinearAlgebra              # model
+using CPLEX, Dates, Ipopt, JuMP  # optimiziers
+using DelimitedFiles             # simulations, parsing
+using DataFrames, JLD, StatsBase # parsing
 
 export coprimeFractionsGenerator
 export gradMagnetizationEntropy, gradModelFreeEnergy, magnetizationEntropy, modelDimension, modelEntropy, modelFreeEnergy, modelInteraction
