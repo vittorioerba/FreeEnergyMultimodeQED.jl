@@ -51,7 +51,7 @@ function heatAndCool(p::Int,q::Int,ts::Vector{T};
     for t in ts
         current = modelFindMinimum(p,q; optimizer=:gradient,
                             temperature=t,
-                            startingCondition=addNoise(current;eta=eta)
+                            startingCondition=addBoxNoise(current;eta=eta)
                            )[5]
         push!(result,[t,current])
     end

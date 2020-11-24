@@ -3,9 +3,8 @@
 A small library to reproduce the results of CITA
 
 The package contains:
-- an implementation of the gradient descent used in the paper;
-- an interface to the non-positive-definite QP solver of [CPLEX](https://www.ibm.com/analytics/cplex-optimizer) through [JuMP](https://jump.dev/), used in the paper to perform global optimization of the model;
-- an interface to the interior point solver of [IPOPT](https://coin-or.github.io/Ipopt/) through [JuMP](https://jump.dev/), not used in the paper, but possibly useful.
+- an implementation of the constrained gradient descent used in the paper;
+- an interface to the non-positive-definite QP solver of [CPLEX](https://www.ibm.com/analytics/cplex-optimizer) through [JuMP](https://jump.dev/), used in the paper to perform global optimization of the model.
 
 A number of helper function implementing the model of the paper are also available.
 
