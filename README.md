@@ -1,6 +1,6 @@
-# FreeEnergyMultimodeQED.jl julia library
+# Self-induced glassy phase in multimodal cavity quantum electrodynamics
 
-A small library to reproduce the results of CITA
+In this repository you can find the julia code for the paper ["Self-induced glassy phase in multimodal cavity quantum electrodynamics"](https://arxiv.org/pdf/2101.03754.pdf).
 
 The package contains:
 - an implementation of the constrained gradient descent used in the paper;
